@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="jqueryui-1.8.16/themes/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
+    <link href="css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <script src="js/i18n/grid.locale-cn.js" type="text/javascript"></script>
+<style>	
+html, body {
+	margin: 0;			/* Remove body margin/padding */
+	padding: 0;
+	overflow: hidden;	/* Remove scroll bars on browser window */	
+    font-size: 75%;
+}
+.ui-jqgrid tr.jqgrow td {	
+white-space: normal !important;	
+height:auto;	
+}
+.ui-jqgrid .ui-pg-input {	
+height:20px;
+}
+	
+	/*弹出窗口样式*/
+        #hiddendiv { display: none; width: 510px; height: 300px; float: left; background-color: #D4D0C8; padding: 5px; position: absolute; z-index: 101; top: 185px; left: 231px; }
+        #hiddencontentdiv { width: 510px; height: 295px; background-color: #FFFFFF; padding-top: 2px; padding-bottom: 2px; float: left; }
+        #closediv { width: 500px; text-align: right; float: left; }
+        #aclosediv { text-decoration: none; color: #000000; font-size: 12px; }
+        #hiddeninfo { display: none; width: 480px; height: 23px; float: left; margin-top: 30px; font-size: 12px; color: Blue; }
+        #hiddencontent { width: 480px; float: left; margin-top: 37px; }
+        #greybackground /*遮罩层样式*/ { background: #000000; width: 100%; display: block; z-index: 100; top: 0px; left: 0px; position: absolute; }
+        .AddWorkText { width: 800px; height: 50px; padding: 2px 8px 0pt 3px; border: 1px solid #CCC; background-color: #E1E4E3; }
+        .input_move { padding: 2px 8px 0pt 3px; height: 50px; width: 800px; border: 1px solid #999; background-color: #4C9DD2; }
+        #btn { width: 7px; }
+</style>
+    <script type="text/javascript">
+	 //显示弹出层
+        function showhiddendiv() {
+            //在当前网页中间弹出层
+            var $hiddendiv = $("#hiddendiv");
+            $hiddendiv.css("top", $(window).height() / 2 - 130); //弹出层的顶点位置
+            $hiddendiv.css("left", $(window).width() / 2 - 180); //弹出层的左侧位置
+            $hiddendiv.slideDown("slow");
+            //追加一个层，遮住页面
+            var docheight = $(document).height(); //获取文档高度
+            $("body").append("<div id='greybackground'></div>"); //动态添加遮罩层
+            $("#greybackground").css({ "opacity": "0.3", "height": docheight }); //设置遮罩层的透明度和高度
+        }
+        //关闭弹出层
+        $(function () {
+            $("#aclosediv").click(function () {
+                //隐藏弹出层
+                var $hiddendiv = $("#hiddendiv");
+                $hiddendiv.fadeOut(500);
+                //清理工作
+                $("#greybackground").remove(); //删除遮罩层
+            });
+        })
+        //添加新工作考评
+        function AddTest() {
+            $("#waitinginfo").show(); //显示请求等待图片和文字
+            //提交到后台
+        }
+        $(function () {
+            $("#gridTable").jqGrid({
+                datatype: "local",
+                height: 250,
+				autowidth:true,
+                colNames: ['编号', '用户名', '性别', '邮箱', 'QQ', '手机号', '出生日期'],
+                colModel: [
+                        { name: 'id', index: 'id', width: 60, sorttype: "int" },
+                        { name: 'userName', index: 'userName', width: 90 },
+                        { name: 'gender', index: 'gender', width: 90 },
+                        { name: 'email', index: 'email', width: 125, sorttype: "string" },
+                        { name: 'QQ', index: 'QQ', width: 100 },
+                        { name: 'mobilePhone', index: 'mobilePhone', width: 120 },
+                        { name: 'birthday', index: 'birthday', width: 100}
+                ],
+                sortname: 'id',
+                sortorder: 'asc',
+                viewrecords: true,
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                pager: "#gridPager",
+				toppager:true,
+				cloneToTop:true,
+                caption: "第一个jqGrid例子"
+				
+            });
+			  
+			var grid = $("#gridTable");
+			  grid.navGrid('#gridPager', {search:true,cloneToTop:true})
+			grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', { // "#list_toppager_left"
+                caption: "编辑",
+                buttonicon: 'ui-icon-wrench',
+                onClickButton: function() {
+                    //在当前网页中间弹出层
+							var $hiddendiv = $("#hiddendiv");
+							$hiddendiv.css("top", $(window).height() / 2 - 130); //弹出层的顶点位置
+							$hiddendiv.css("left", $(window).width() / 2 - 180); //弹出层的左侧位置
+							$hiddendiv.slideDown("slow");
+							//追加一个层，遮住页面
+							var docheight = $(document).height(); //获取文档高度
+							$("body").append("<div id='greybackground'></div>"); //动态添加遮罩层
+							$("#greybackground").css({ "opacity": "0.3", "height": docheight }); //设置遮罩层的透明度和高度
+                }
+            });
+			grid.jqGrid('navButtonAdd', '#' + grid[0].id + '_toppager_left', { // "#list_toppager_left"
+                caption: "选择",
+                buttonicon: 'ui-icon-wrench',
+                onClickButton: function() {
+                    grid.jqGrid('columnChooser', {
+                        done: function(perm) {
+                            if (!perm) { return false; }
+                            this.jqGrid('remapColumns', perm, true);
+                        }
+                    });
+                }
+            });
+			  
+			
+		
+			
+			
+			
+			
+            var mydata = [
+                { id: "1", userName: "polaris", gender: "男", email: "fef@163.com", QQ: "33334444", mobilePhone: "13223423424", birthday: "1985-10-01" },
+                { id: "2", userName: "李四", gender: "女", email: "faf@gmail.com", QQ: "222222222", mobilePhone: "13223423", birthday: "1986-07-01" },
+                { id: "3", userName: "王五", gender: "男", email: "fae@163.com", QQ: "99999999", mobilePhone: "1322342342", birthday: "1985-10-01" },
+                { id: "4", userName: "马六", gender: "女", email: "aaaa@gmail.com", QQ: "23333333", mobilePhone: "132234662", birthday: "1987-05-01" },
+                { id: "5", userName: "赵钱", gender: "男", email: "4fja@gmail.com", QQ: "22222222", mobilePhone: "1343434662", birthday: "1982-10-01" },
+                { id: "6", userName: "小毛", gender: "男", email: "ahfi@yahoo.com", QQ: "4333333", mobilePhone: "1328884662", birthday: "1987-12-01" },
+                { id: "7", userName: "小李", gender: "女", email: "note@sina.com", QQ: "21122323", mobilePhone: "13220046620", birthday: "1985-10-01" },
+                { id: "8", userName: "小三", gender: "男", email: "oefh@sohu.com", QQ: "242424366", mobilePhone: "1327734662", birthday: "1988-12-01" },
+                { id: "9", userName: "孙先", gender: "男", email: "76454533@qq.com", QQ: "76454533", mobilePhone: "132290062", birthday: "1989-11-21" }
+                ];
+			
+            for (var i = 0; i <= mydata.length; i++)
+                jQuery("#gridTable").jqGrid('addRowData', i + 1, mydata[i]);
+        });
+    </script>
+    <title>jqGridDemo</title>
+</head>
+<body style=" margin:0px;">
+    <table id="gridTable">
+    </table>
+	<div id="ptoolbar"></div>
+    <div id="gridPager">
+    </div>
+<!-- 弹出层-->
+    <div id="hiddendiv">
+        <div id="hiddencontentdiv">
+            <div id="closediv">
+                <a href="#" id="aclosediv">[关闭]</a>
+            </div>
+            <div id="hiddencontent">
+                <div style="width: 400px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                    标题：&nbsp;<input id="txtTitle" type="text" /><br />
+                    <br />
+                    <table style="width: 100%; border-color: #5daccd; border-collapse: collapse;" border="1"
+                        cellpadding="0" cellspacing="0" bordercolor="#5daccd">
+                        <tr>z
+                            <td style="text-indent: 1em; width: 100px;">
+                            </td>
+                            <td style="text-align: center;" class="style1">
+                                届次
+                            </td>
+                            <td style="text-indent: 1em; text-align: center;" class="style2">
+                                会次
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-indent: 1em; width: 100px; text-align: center;">
+                                人大：
+                            </td>
+                            <td style="text-align: center;" class="style1">
+                                <select id="Select1" name="D1">
+                                    <option>全部</option>
+                                    <option>15</option>
+                                    <option>14</option>
+                                    <option>13</option>
+                                </select>
+                            </td>
+                            <td style="text-indent: 1em; text-align: center;" class="style2">
+                                <select id="Select2" name="D1">
+                                    <option>全部</option>
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-indent: 1em; width: 100px; text-align: center;">
+                                政协：
+                            </td>
+                            <td style="text-align: center;" class="style1">
+                                <select id="Select3" name="D1">
+                                    <option>全部</option>
+                                    <option>12</option>
+                                    <option>11</option>
+                                    <option>10</option>
+                                </select>
+                            </td>
+                            <td style="text-indent: 1em; text-align: center;" class="style2">
+                                <select id="Select4" name="D1">
+                                    <option>全部</option>
+                                    <option>5</option>
+                                    <option>4</option>
+                                    <option>3</option>
+                                    <option>2</option>
+                                    <option>1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: center; height: 30px;">
+                                <input type="button" value="提交" onclick="AddTest()" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="hiddeninfo" style="width: 400px; margin-left: auto; margin-right: auto;
+                        margin-top: 10px;">
+                        <span style="color: Blue;">&nbsp;您选择的条件不符合要求！</span>
+                    </div>
+                    <div id="errorinfo" style="display: none">
+                        <span style="color: Blue;">&nbsp;添加失败！</span>
+                    </div>
+                    <div style="margin-top: 25px;">
+                    </div>
+                    <div id="waitinginfo" style="display: none; width: 300px;">
+                        <img src="images/onloading.gif" />
+                        <span style="color: Blue;">&nbsp;正在提交数据，请耐心等待...</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

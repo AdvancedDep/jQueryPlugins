@@ -1,0 +1,157 @@
+
+#themeGallery ul {
+margin: 0;
+padding: 0;
+}
+#themeGallery li {
+float: left;
+width: 96px;
+color: #fff;
+font-size: 1em;
+margin: .8em 5px .8em 0;
+list-style: none;
+}
+#themeGallery li a {
+color: #888;
+text-decoration: none;
+position: relative;
+}
+#themeGallery li a:hover {
+color: #fff;
+
+}
+#themeGallery li img {
+width: 90px;
+height: auto;
+display: block;
+padding-top:3px;
+border:0;
+border-top: 2px solid #000;
+position: relative;
+}
+#themeGallery li a:hover img {
+border-top: 2px solid #ccc;
+}
+#themeGallery li a:active img {
+border-top: 2px solid #f58809;
+}
+#themeGallery li span {
+	display: block;
+	margin: .1em 4px;
+}
+#themeGallery li span.themeName {
+font-weight: normal;
+}
+#themeGallery li span.themeDesiger {
+	font-size: .9em;
+}
+#themeGallery a.download, #themeGallery a.edit {
+	font-size: .9em;
+	text-decoration: none !important;
+	float: left;
+	background: #333 url(../images/app/bg_sml_download_edit_btn.png) repeat-x scroll 50% 50% ;
+	margin: 3px 4px 0 0;
+	padding: 2px 4px;
+	border: 1px solid #222;
+	color: #ccc;
+	
+}
+#themeGallery a.download:hover, #themeGallery a.edit:hover {
+	background: #444 url(../images/app/bg_sml_download_edit_btn_hover.png) repeat-x scroll 50% 50%;
+	color: #ddd;
+}
+
+
+/*help tab*/
+#help h2 {
+	font-size: 1.2em;
+	margin: 1em 0 .3em;
+}
+#help a {
+	color: #fa9300;
+}
+#help span.icon {
+	float: left;
+	background-image: url(../images/app/tr_icons_orange.png);
+	height: 13px;
+	width: 14px;
+	margin: -1px 4px 0 0;
+}
+#help p {
+	font-size: 1.1em;
+}
+
+/*bookmarklet notice */
+#getBookmarklet {
+ border: 1px solid #fcefa1; 
+ background: #fbf9ee url(../images/app/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; 
+ color: #363636; 
+ font-size: 1.3em;
+ padding: 0 10px;
+ float: right;
+ margin: -30px -25px 0 0;
+ -moz-border-radius: 6px !important; -webkit-border-radius: 6px !important;  border-radius: 6px !important; 
+}
+#getBookmarklet p {
+	margin: .7em 0;
+	padding: 0;
+}
+#getBookmarklet a {
+	color: #297ED3;
+}
+#getBookmarklet a:hover {
+	color: #1667B7;
+}
+#getBookmarklet span.icon {
+	float: left;
+	background: url(../images/app/tr_icons_orange.png) -224px -112px no-repeat;
+	margin: -2px 4px 0 0;
+}
+
+/*COMPONENTS COLUMN*/
+#components {
+	background: #fff;
+	padding: 15px;
+	float: right;
+	width: 680px;
+}
+
+#versionNotice {
+	margin: 20px 0;
+	border: 1px solid #333;
+	padding: 20px;
+	font-size: 1.2em;
+	background: #eee;
+}
+#compGroupA {
+	float: left;
+	width: 58%;
+}
+
+#compGroupB {
+	float: right;
+	width: 38%;
+}
+.demoHeaders {
+	font-size: 1.3em;
+	font-weight: normal;
+	margin: 2em 0 1em;
+	clear: both;
+}
+.demoHeaders span {
+	font-size: .8em;
+}
+
+#components #dialog_link {
+	padding: .4em 1em .4em 20px;
+	text-decoration: none;
+	position: relative;
+}
+#components #dialog_link span.ui-icon {
+	margin: 0 5px 0 0;
+	position: absolute;
+	left: .2em;
+	top: 50%;
+	margin-top: -8px;
+	zoom: 1;
+}
