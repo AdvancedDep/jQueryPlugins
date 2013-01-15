@@ -1,4 +1,4 @@
-jQueryPlugins
+﻿jQueryPlugins
 =============
 项目目的：集中管理开发组使用的前端Jquery插件，通过完善Example页面，学习和实践Jquery各种组件的开发。
 
@@ -17,6 +17,10 @@ My97DatePicker4.72（日期拾取器）
 Float（浮动效果）
 --------------------
 支持多图片（区域）的浮动效果。
+
+Highcharts（jQuery图表插件）
+--------------------
+可绘制各种图表，参考demo.htm和examples文件夹中的示例
 
 
 
