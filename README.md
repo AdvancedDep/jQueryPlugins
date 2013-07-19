@@ -11,8 +11,9 @@ Alert（弹出提示窗口）
 -------------------------------
 选择基于JqueryUI的日期拾取器(待开发)
 
-> 引入WdatePicker.js后在文本框添加onclick事件：
-> <input type="text" onclick="WdatePicker()" />
+qTip（Tooltip提示信息）
+--------------------
+基于jQuery的Tooltip类提示信息
 
 Float（浮动效果）
 --------------------
